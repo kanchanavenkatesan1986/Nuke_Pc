@@ -1,0 +1,206 @@
+{
+  "app_name": "TVK Movies – Vintage Public Domain Cinema",
+  "total_movies": 20,
+  "categories": [
+    {
+      "name": "Horror",
+      "movies": [
+        {
+          "title": "Nosferatu",
+          "year": 1922,
+          "genre": "Silent Horror",
+          "director": "F. W. Murnau",
+          "duration": "94 minutes",
+          "archive_link": "https://archive.org/details/nosferatu",
+          "description": "A silent German Expressionist vampire film considered one of the most influential horror films ever made."
+        },
+        {
+          "title": "Night of the Living Dead",
+          "year": 1968,
+          "genre": "Zombie Horror",
+          "director": "George A. Romero",
+          "duration": "96 minutes",
+          "archive_link": "https://archive.org/details/night_of_the_living_dead",
+          "description": "A groundbreaking zombie horror film that entered the public domain due to a copyright error."
+        },
+        {
+          "title": "House on Haunted Hill",
+          "year": 1959,
+          "genre": "Horror Thriller",
+          "director": "William Castle",
+          "duration": "75 minutes",
+          "archive_link": "https://archive.org/details/house_on_haunted_hill_1959",
+          "description": "A suspenseful haunted house story starring Vincent Price."
+        },
+        {
+          "title": "The Last Man on Earth",
+          "year": 1964,
+          "genre": "Sci-Fi Horror",
+          "director": "Ubaldo Ragona",
+          "duration": "86 minutes",
+          "archive_link": "https://archive.org/details/lastmanonearth",
+          "description": "Vincent Price stars in this early adaptation of Richard Matheson's novel I Am Legend."
+        },
+        {
+          "title": "White Zombie",
+          "year": 1932,
+          "genre": "Classic Horror",
+          "director": "Victor Halperin",
+          "duration": "69 minutes",
+          "archive_link": "https://archive.org/details/white_zombie_1932",
+          "description": "One of the earliest zombie films in cinema history."
+        }
+      ]
+    },
+    {
+      "name": "Film Noir",
+      "movies": [
+        {
+          "title": "Scarlet Street",
+          "year": 1945,
+          "genre": "Film Noir",
+          "director": "Fritz Lang",
+          "duration": "102 minutes",
+          "archive_link": "https://archive.org/details/scarlet_street",
+          "description": "A dark psychological crime drama directed by Fritz Lang."
+        },
+        {
+          "title": "Detour",
+          "year": 1945,
+          "genre": "Film Noir",
+          "director": "Edgar G. Ulmer",
+          "duration": "68 minutes",
+          "archive_link": "https://archive.org/details/detour_1945",
+          "description": "A low-budget noir classic known for its fatalistic tone."
+        },
+        {
+          "title": "D.O.A.",
+          "year": 1950,
+          "genre": "Film Noir",
+          "director": "Rudolph Maté",
+          "duration": "83 minutes",
+          "archive_link": "https://archive.org/details/doa_1950",
+          "description": "A man discovers he has been poisoned and has only hours to live."
+        },
+        {
+          "title": "The Stranger",
+          "year": 1946,
+          "genre": "Thriller Noir",
+          "director": "Orson Welles",
+          "duration": "95 minutes",
+          "archive_link": "https://archive.org/details/the_stranger_1946",
+          "description": "A war crimes investigator tracks a Nazi fugitive hiding in America."
+        },
+        {
+          "title": "The Strange Love of Martha Ivers",
+          "year": 1946,
+          "genre": "Film Noir Drama",
+          "director": "Lewis Milestone",
+          "duration": "116 minutes",
+          "archive_link": "https://archive.org/details/strange_love_of_martha_ivers",
+          "description": "A complex noir drama about ambition, secrets, and guilt."
+        }
+      ]
+    },
+    {
+      "name": "Drama",
+      "movies": [
+        {
+          "title": "Meet John Doe",
+          "year": 1941,
+          "genre": "Drama",
+          "director": "Frank Capra",
+          "duration": "122 minutes",
+          "archive_link": "https://archive.org/details/meet_john_doe",
+          "description": "A powerful political drama about media influence and populism."
+        },
+        {
+          "title": "Cyrano de Bergerac",
+          "year": 1950,
+          "genre": "Historical Drama",
+          "director": "Michael Gordon",
+          "duration": "113 minutes",
+          "archive_link": "https://archive.org/details/cyrano_de_bergerac_1950",
+          "description": "A romantic drama based on the classic French play."
+        },
+        {
+          "title": "One-Eyed Jacks",
+          "year": 1961,
+          "genre": "Western Drama",
+          "director": "Marlon Brando",
+          "duration": "141 minutes",
+          "archive_link": "https://archive.org/details/one_eyed_jacks",
+          "description": "A Western revenge story directed by and starring Marlon Brando."
+        },
+        {
+          "title": "A Farewell to Arms",
+          "year": 1932,
+          "genre": "Romantic Drama",
+          "director": "Frank Borzage",
+          "duration": "89 minutes",
+          "archive_link": "https://archive.org/details/a_farewell_to_arms_1932",
+          "description": "A romantic war drama based on Ernest Hemingway's novel."
+        },
+        {
+          "title": "Captain Kidd",
+          "year": 1945,
+          "genre": "Adventure Drama",
+          "director": "Rowland V. Lee",
+          "duration": "90 minutes",
+          "archive_link": "https://archive.org/details/captain_kidd_1945",
+          "description": "A swashbuckling pirate adventure film starring Charles Laughton."
+        }
+      ]
+    },
+    {
+      "name": "Silent Classics",
+      "movies": [
+        {
+          "title": "The General",
+          "year": 1926,
+          "genre": "Silent Comedy",
+          "director": "Buster Keaton",
+          "duration": "75 minutes",
+          "archive_link": "https://archive.org/details/the_general_1926",
+          "description": "A silent comedy masterpiece set during the American Civil War."
+        },
+        {
+          "title": "Broken Blossoms",
+          "year": 1919,
+          "genre": "Silent Drama",
+          "director": "D. W. Griffith",
+          "duration": "90 minutes",
+          "archive_link": "https://archive.org/details/broken_blossoms_1919",
+          "description": "A silent romantic tragedy directed by D. W. Griffith."
+        },
+        {
+          "title": "Dr. Jekyll and Mr. Hyde",
+          "year": 1920,
+          "genre": "Silent Horror",
+          "director": "John S. Robertson",
+          "duration": "80 minutes",
+          "archive_link": "https://archive.org/details/dr_jekyll_mr_hyde_1920",
+          "description": "A silent adaptation of Robert Louis Stevenson's classic novel."
+        },
+        {
+          "title": "Blackmail",
+          "year": 1929,
+          "genre": "Crime Thriller",
+          "director": "Alfred Hitchcock",
+          "duration": "85 minutes",
+          "archive_link": "https://archive.org/details/blackmail_1929",
+          "description": "One of Alfred Hitchcock's earliest thrillers."
+        },
+        {
+          "title": "The Phantom of the Opera",
+          "year": 1925,
+          "genre": "Silent Horror",
+          "director": "Rupert Julian",
+          "duration": "93 minutes",
+          "archive_link": "https://archive.org/details/phantom_of_the_opera_1925",
+          "description": "A silent horror classic starring Lon Chaney."
+        }
+      ]
+    }
+  ]
+}

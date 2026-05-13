@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search Movies</title>
+
+<style>
+body{
+    background:black;
+    margin:0;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    font-family:Lexend;
+    color:white;
+}
+#main{
+    width: 980px;
+}
+
+#searchInput{
+    width: 960px;
+    padding: 20px;
+    font-size: 30px;
+}
+#yearFilter{
+    width:480px ;
+    padding: 20px;
+    font-size: 30px;
+
+}
+#categoryFilter{
+    width:480px ;
+    padding: 20px;
+    font-size: 30px;
+
+}
+
+
+.top-bar{
+  display:flex;
+  gap:10px;
+  padding:15px;
+}
+
+input,select{
+  padding:10px;
+  border-radius:5px;
+  border:none;
+}
+
+.movie-card{
+  display:flex;
+  background:#1c1c1c;
+  margin:15px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.movie-card img{
+  width:120px;
+  height:160px;
+  object-fit:cover;
+}
+
+.movie-details{
+  padding:15px;
+  flex:1;
+}
+
+.year-badge{
+  background:yellow;
+  color:black;
+  padding:5px 10px;
+  border-radius:5px;
+  float:right;
+}
+</style>
+</head>
+
+<body>
+    <div id="main">
+
+<div class="top-bar">
+  <input type="text" id="searchInput" placeholder="Search movie...">
+  
+  
+</div>
+<div class="top-bar">
+<select id="yearFilter">
+    <option value="">All Year</option>
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+  </select>
+
+  <select id="categoryFilter">
+    <option value="">All Category</option>
+    <option value="Tamil">Tamil</option>
+    <option value="Hollywood">Hollywood</option>
+  </select>
+
+  </div>
+
+<div id="movieList"></div>
+
+</div>
+
+<script>
+let allMovies = [];
+
+// 🔥 Add all JSON file paths here
+const jsonFiles = [
+  "Data_Json/Tamil/tamil_2024.json",
+  "Data_Json/Tamil/tamil_2025.json",
+];
+
+// Load all JSON files
+Promise.all(jsonFiles.map(file => fetch(file).then(res => res.json())))
+.then(results => {
+
+  // Merge all JSON into one array
+  allMovies = results.flat();
+
+  displayMovies(allMovies);
+});
+
+function displayMovies(movies){
+  const container = document.getElementById("movieList");
+  container.innerHTML = "";
+
+  movies.forEach(movie => {
+    container.innerHTML += `
+      <div class="movie-card" onclick="openMovie(${movie.id})">
+        <img src="${movie.image}">
+        <div class="movie-details">
+          <span class="year-badge">${movie.year}</span>
+          <h2>${movie.title}</h2>
+          <p>Release Date : ${movie.release}</p>
+          <p>Language : ${movie.language}</p>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function openMovie(id){
+  window.location.href = "movie.html?id=" + id;
+}
+
+// Filters
+document.getElementById("searchInput").addEventListener("input", filterMovies);
+document.getElementById("yearFilter").addEventListener("change", filterMovies);
+document.getElementById("categoryFilter").addEventListener("change", filterMovies);
+
+function filterMovies(){
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const year = document.getElementById("yearFilter").value;
+  const category = document.getElementById("categoryFilter").value.toLowerCase();
+
+  const filtered = allMovies.filter(movie =>
+    movie.title.toLowerCase().includes(search) &&
+    (year === "" || movie.year == year) &&
+    (category === "" || movie.category.toLowerCase().includes(category))
+  );
+
+  displayMovies(filtered);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Movie Details</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap">
+
+<style>
+body{
+    background:black;
+    margin:0;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    font-family:Lexend;
+    color:white;
+}
+
+/* Main fixed container */
+.wrapper{
+    width:980px;
+    background:black;
+}
+
+/* Header */
+.header{
+    position:relative;
+    height:110px;
+}
+
+#menu{
+    position:absolute;
+    width:70px;
+    top:20px;
+    left:20px;
+    cursor:pointer;
+}
+
+#titleLogo{
+    position:absolute;
+    width:300px;
+    top:15px;
+    left:340px;
+}
+
+#search{
+    position:absolute;
+    width:60px;
+    height:60px;
+    top:23px;
+    right:23px;
+}
+
+/* TOP SECTION */
+#top{
+    display:flex;
+    gap:40px;
+    padding:30px;
+}
+
+#ti{
+    width:300px;
+    height:465px;
+    border:5px solid white;
+    border-radius:10px;
+}
+
+.details{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+#tt{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+#lang,#release,#duration,#cast{
+    font-size:22px;
+    margin:6px 0;
+}
+
+/* Buttons */
+#pd{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 40px;
+}
+
+#pb,#db{
+    width:420px;
+}
+
+/* Story */
+#story{
+    padding:20px 40px;
+    font-size:20px;
+    text-align:center;
+}
+
+/* Quality Section */
+#list{
+    background:#1d1c1c;
+    margin:20px;
+    border-radius:20px;
+    padding:20px;
+}
+
+.qualityBox{
+    background:black;
+    padding:15px;
+    border-radius:20px;
+    border:5px solid yellow;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.qualityBox a{
+    color:white;
+    text-decoration:none;
+    font-size:22px;
+}
+
+/* Navigation Overlay */
+.overla{
+    height:100%;
+    width:0%;
+    position:fixed;
+    z-index:10;
+    top:0;
+    left:0;
+    background:#101013;
+    overflow-x:hidden;
+    transition:0.5s;
+}
+
+#close{
+    position:absolute;
+    width:70px;
+    top:20px;
+    left:20px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- NAVIGATION -->
+<div id="myNav" class="overla">
+    <img id="close" onclick="closeNav()" src="./M Image/Close icon.png"/>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+    <img id="menu" onclick="openNav()" src="./M Image/Menu icon.png"/>
+    <img id="titleLogo" src="./M Image/Vip Title.png"/>
+    <a href="/search.html"><img id="search" src="./M Image/Search icon.png"/></a>
+</div>
+
+<!-- TOP SECTION -->
+<div id="top">
+    <img id="ti"/>
+
+    <div class="details">
+        <h1 id="tt"></h1>
+        <h2 id="lang"></h2>
+        <h2 id="release"></h2>
+        <h2 id="duration"></h2>
+        <h2 id="cast"></h2>
+    </div>
+</div>
+
+<!-- QUICK PLAY -->
+<div id="pd">
+    <a id="watch480"><img id="pb" src="./M Image/Play B (1).png"/></a>
+    <a id="download480"><img id="db" src="./M Image/Play B (2).png"/></a>
+</div>
+
+<p id="story"></p>
+
+<!-- QUALITY SECTION -->
+<div id="list">
+    <h1 style="text-align:center;margin-bottom:20px;">Watch & Download</h1>
+
+    <div class="qualityBox">
+        <a id="watch480b"><h2 id="title480"></h2></a>
+        <a id="download480b">Download</a>
+    </div>
+
+    <div class="qualityBox">
+        <a id="watch720b"><h2 id="title720"></h2></a>
+        <a id="download720b">Download</a>
+    </div>
+
+    <div class="qualityBox">
+      <img src="./M Image/Vector.png" style="width: 50px;">
+        <a id="watch1080b"><h2 id="title1080"></h2></a>
+        <a id="download1080b"><img src="./M Image/Vector (1).png" style="width: 50px;"></a>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+function openNav(){
+document.getElementById("myNav").style.width="460px";
+}
+function closeNav(){
+document.getElementById("myNav").style.width="0%";
+}
+
+// URL PARAMETERS
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+const year = params.get("year");
+const movieId = params.get("id");
+
+if(!category || !year || !movieId){
+alert("Invalid movie request");
+throw new Error("Missing parameters");
+}
+
+const filePath = `Data_Json/${category}/${category.toLowerCase()}_${year}.json`;
+
+fetch(filePath)
+.then(res=>{
+if(!res.ok) throw new Error("JSON not found");
+return res.json();
+})
+.then(data=>{
+
+const movie = data.find(m=>m.id==movieId);
+
+if(!movie){
+document.body.innerHTML="<h1 style='text-align:center;color:white'>Movie Not Found</h1>";
+return;
+}
+
+ti.src = movie.image;
+tt.textContent = movie.title;
+lang.textContent = "Language : "+movie.language;
+release.textContent = "Release : "+movie.release;
+duration.textContent = "Duration : "+movie.duration;
+cast.textContent = "Cast : "+movie.cast;
+story.textContent = "Story : "+movie.story;
+
+// 480p
+watch480.href = movie.watch480 || "#";
+download480.href = movie.download480 || "#";
+watch480b.href = movie.watch480 || "#";
+download480b.href = movie.download480 || "#";
+title480.textContent = movie.title+" 480p";
+
+// 720p
+watch720b.href = movie.watch720 || "#";
+download720b.href = movie.download720 || "#";
+title720.textContent = movie.title+" 720p HD";
+
+// 1080p
+watch1080b.href = movie.watch1080 || "#";
+download1080b.href = movie.download1080 || "#";
+title1080.textContent = movie.title+" 1080p FHD";
+
+})
+.catch(err=>{
+console.log(err);
+document.body.innerHTML="<h1 style='text-align:center;color:white'>Error Loading Movie</h1>";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIP Movies</title>
+
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* SLIDER */
+#slider {
+  width: 980px;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  background-color: black;
+}
+.slides { display: none; }
+.slides img {
+  width: 960px;
+  height: 460px;
+  object-fit: cover;
+  border: 1px solid #fff;
+  padding: 0 10px;
+}
+
+/* DOTS */
+#dotContainer {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  background: #aaa;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dot.active { background: yellow; }
+
+/* SCROLL */
+.scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+  width: 960px;
+  height: 500px;
+}
+.card {
+  width: 260px;
+  height: 500px;
+  background: #111;
+  padding: 5px;
+  border-radius: 8px;
+  text-align: center;
+}
+.card img {
+  width: 240px;
+  height: 450px;
+  border-radius: 8px;
+}
+.card p {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+}
+
+/* BUTTONS */
+button {
+  margin: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  background: yellow;
+  color: black;
+}
+</style>
+</head>
+
+<body>
+<a href="/search.html">
+<h2>🔥 Slider</h2></a>
+<div id="slider">
+  <div id="sliderContainer"></div>
+  <div id="dotContainer"></div>
+</div>
+
+<h2>📅 Year Collection</h2>
+<button onclick="openList('Tamil','2025')">2025 Tamil Movies</button>
+<button onclick="openList('Tamil','2024')">2024 Tamil Movies</button>
+<button onclick="openList('Hollywood','2025')">2025 Hollywood Movies</button>
+<button onclick="openList('Hollywood','2024')">2024 Hollywood Movies</button>
+
+<h2>🎬 Latest Tamil</h2>
+<div class="scroll" id="tamilSection"></div>
+
+<h2>🎬 Latest Hollywood</h2>
+<div class="scroll" id="hollywoodSection"></div>
+
+<script>
+
+// ======================
+// LOAD TAMIL JSON
+// ======================
+fetch("Data_Json/Tamil/tamil_2025.json")
+  .then(res => res.json())
+  .then(data => {
+      data.sort((a,b)=> b.year - a.year);
+      createScroll(data, "tamilSection", "Tamil");
+  })
+  .catch(()=> console.log("Tamil JSON error"));
+
+
+// ======================
+// LOAD HOLLYWOOD JSON
+// ======================
+fetch("Data_Json/Hollywood/hollywood_2025.json")
+  .then(res => res.json())
+  .then(data => {
+      data.sort((a,b)=> b.year - a.year);
+      createScroll(data, "hollywoodSection", "Hollywood");
+  })
+  .catch(()=> console.log("Hollywood JSON error"));
+
+
+// ======================
+// CREATE SCROLL SECTION
+// ======================
+function createScroll(movieArray, containerId, category){
+
+  const container = document.getElementById(containerId);
+
+  movieArray.slice(0,6).forEach(movie => {
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const a = document.createElement("a");
+
+    // 🔥 FIXED LINK
+    a.href = `movie.html?category=${category}&year=${movie.year}&id=${movie.id}`;
+
+    a.style.textDecoration = "none";
+    a.style.color = "white";
+
+    const img = document.createElement("img");
+    img.src = movie.image;
+    img.alt = movie.title;
+
+    const p = document.createElement("p");
+    p.textContent = movie.title;
+
+    a.appendChild(img);
+    a.appendChild(p);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
+
+  // VIEW ALL
+  const viewAllCard = document.createElement("div");
+  viewAllCard.className = "card";
+
+  const viewLink = document.createElement("a");
+
+  const latestYear = Math.max(...movieArray.map(m => m.year));
+  viewLink.href = `list.html?category=${category}&year=${latestYear}`;
+
+  const viewImg = document.createElement("img");
+  viewImg.src = "M Images/View all.png";
+  viewImg.style.background = "black";
+  viewImg.style.padding = "10px";
+
+  viewLink.appendChild(viewImg);
+  viewAllCard.appendChild(viewLink);
+  container.appendChild(viewAllCard);
+}
+
+
+// ======================
+// YEAR BUTTON REDIRECT
+// ======================
+function openList(category, year){
+  window.location.href = `list.html?category=${category}&year=${year}`;
+}
+
+
+// ======================
+// SIMPLE SLIDER (Optional)
+// ======================
+let sliderIndex = 0;
+let sliderTimeout;
+
+fetch("Data_Json/slides.json")
+  .then(res => res.json())
+  .then(slides => createSlider(slides))
+  .catch(()=> console.log("slides.json not found"));
+
+function createSlider(slidesData){
+  const slider = document.getElementById("sliderContainer");
+  const dotsContainer = document.getElementById("dotContainer");
+
+  slidesData.forEach((slide,index)=>{
+
+    const slideDiv = document.createElement("div");
+    slideDiv.className = "slides";
+
+    const a = document.createElement("a");
+    a.href = slide.url;
+
+    const img = document.createElement("img");
+    img.src = slide.image;
+
+    a.appendChild(img);
+    slideDiv.appendChild(a);
+    slider.appendChild(slideDiv);
+
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.addEventListener("click",()=> showSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+
+  showSlide(0);
+}
+
+function showSlide(index){
+  clearTimeout(sliderTimeout);
+
+  const slides = document.querySelectorAll(".slides");
+  const dots = document.querySelectorAll(".dot");
+
+  slides.forEach(s=> s.style.display="none");
+  dots.forEach(d=> d.classList.remove("active"));
+
+  slides[index].style.display="block";
+  dots[index].classList.add("active");
+
+  sliderIndex = (index+1) % slides.length;
+  sliderTimeout = setTimeout(()=> showSlide(sliderIndex), 3000);
+}
+
+</script>
+
+</body>
+</html>

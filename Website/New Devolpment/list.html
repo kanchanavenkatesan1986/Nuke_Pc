@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie List</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#111;
+    color:#fff;
+    padding:20px;
+}
+h2{
+    text-align:center;
+}
+.movie-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:15px;
+}
+.card{
+    background:#222;
+    padding:10px;
+    border-radius:8px;
+    text-align:center;
+}
+.card img{
+    width:100%;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<h2 id="title"></h2>
+<div class="movie-container" id="movieContainer"></div>
+
+<script>
+
+const container = document.getElementById("movieContainer");
+const title = document.getElementById("title");
+
+// Get URL Parameters
+const urlParams = new URLSearchParams(window.location.search);
+const category = urlParams.get("category");   // Tamil / Hollywood
+const year = urlParams.get("year");           // 2025 / 2024
+
+// Validate
+if(!category || !year){
+    title.innerText = "Invalid Request";
+    container.innerHTML = "<p>Category or Year missing</p>";
+    throw new Error("Missing parameters");
+}
+
+title.innerText = `${year} ${category} Movies`;
+
+// ✅ Dynamic File Path
+const filePath = `Data_Json/${category}/${category.toLowerCase()}_${year}.json`;
+
+// Load Movies
+async function loadMovies(){
+    try{
+        const res = await fetch(filePath);
+
+        if(!res.ok){
+            throw new Error("File not found");
+        }
+
+        const movies = await res.json();
+        displayMovies(movies);
+
+    }catch(err){
+        console.log("Error:", err);
+        container.innerHTML = "<p>No Movies Found</p>";
+    }
+}
+
+// Display Movies
+function displayMovies(movies){
+
+    container.innerHTML = "";
+
+    if(!movies || movies.length === 0){
+        container.innerHTML = "<p>No Movies Available</p>";
+        return;
+    }
+
+    movies.forEach(movie => {
+
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        // 🔥 Create Link with id + category + year
+        const link = document.createElement("a");
+        link.href = `movie.html?category=${category}&year=${year}&id=${movie.id}`;
+        link.style.textDecoration = "none";
+        link.style.color = "white";
+
+        link.innerHTML = `
+            <img src="${movie.image}" alt="${movie.title}">
+            <h3>${movie.title}</h3>
+            <p>${movie.year} | ${movie.category}</p>
+        `;
+
+        card.appendChild(link);
+        container.appendChild(card);
+    });
+}
+
+loadMovies();
+
+</script>
+
+</body>
+</html>
