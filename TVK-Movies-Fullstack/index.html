@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Movies - Watch Free Tamil & Hollywood Movies</title>
+    
+    <link rel="stylesheet" href="./src/main.css"/>
+    <script src="./src/main.js" defer></script>
+    
+    <!-- Lexend Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap"/>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PFQWGPSM');</script>
+    <!-- End Google Tag Manager -->
+</head>
+ 
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFQWGPSM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="main">
+
+    <!-- Popup Overlay -->
+    <div id="sharePopup" class="popup-overlay">
+        <div id="shareBtn" class="popup-box">
+            <button id="closePopup" class="popup-close">✕</button>
+            <img src="./src/popup-img.png" class="popup-banner" alt="Share TVK Movies">
+            <div class="popup-content">
+                <div class="countdown">
+                    Closing in <span id="timer">10</span>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Drawer (Overlay) -->
+    <div id="myNav" class="overlay">
+        <img src="./m-image/Close icon.png" class="close" onclick="closeNav()" alt="Close Menu">
+        <img src="./m-image/VIP Movies.jpg" class="navimg" alt="VIP Movies">
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a href="sub-pages/feedback.html" class="nav-link">
+                <i class="fa-solid fa-comment-dots"></i> Feedback
+            </a>
+            <a href="sub-pages/about.html" class="nav-link">
+                <i class="fa-solid fa-circle-info"></i> About
+            </a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="./m-image/Menu icon.png" class="menu" onclick="openNav()" alt="Menu">
+        <img src="./m-image/Vip Title.png" class="title" alt="VIP Movies Logo">
+        <a href="search.html">
+            <img src="./m-image/Search icon.png" class="search" alt="Search">
+        </a>
+    </div>
+
+    <!-- Slider -->
+    <div id="slider">
+        <div id="slidesContainer"></div>
+        <div id="dot"></div>
+    </div>
+
+    <!-- Years Collection Section Header -->
+    <div class="info">
+        <h1 class="info-head">Years Collection</h1>
+        <h1 class="info-all" onclick="window.location.href='years.html'">
+            View All <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
+        </h1>
+    </div>
+
+    <!-- Year Links -->
+    <div class="main-year">
+        <div class="sub-year">
+            <div class="year" onclick="filterMovie('Tamil','2026')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2026 Tamil Movies
+            </div>
+            <div class="year" onclick="filterMovie('Tamil','2025')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2025 Tamil Movies
+            </div>
+            <div class="year" onclick="filterMovie('Tamil','2024')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2024 Tamil Movies
+            </div>
+        </div>
+
+        <div class="sub-year">
+            <div class="year" onclick="filterMovie('Hollywood','2026')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2026 Hollywood Movies
+            </div>
+            <div class="year" onclick="filterMovie('Hollywood','2025')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2025 Hollywood Movies
+            </div>
+            <div class="year" onclick="filterMovie('Hollywood','2024')">
+                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2024 Hollywood Movies
+            </div>
+        </div>
+    </div>
+    
+    <button class="all-year" onclick="window.location.href='years.html'">
+        View Years Collection <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i>
+    </button>
+
+    <!-- Tamil Movies Section -->
+    <div class="info">
+        <h1 class="info-head">2026 Tamil Movies</h1>
+        <h1 class="info-all" onclick="filterMovie('Tamil','2026')">
+            View All <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
+        </h1>
+    </div>
+    <div class="scroll" id="tamilMovies"></div>
+
+    <!-- Hollywood Movies Section -->
+    <div class="info">
+        <h1 class="info-head">2025 Hollywood Movies</h1>
+        <h1 class="info-all" onclick="filterMovie('Hollywood','2025')">
+            View All <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
+        </h1>
+    </div>
+    <div class="scroll" id="hollywoodMovies"></div>
+
+</div>
+
+<!-- scripts -->
+<script>
+    // Popup Overlay Timer
+    const popup = document.getElementById("sharePopup");
+    const closeBtn = document.getElementById("closePopup");
+    const timerText = document.getElementById("timer");
+    let seconds = 10;
+
+    const countdown = setInterval(() => {
+        seconds--;
+        timerText.innerText = seconds;
+        if(seconds <= 0){
+            clearInterval(countdown);
+            popup.style.display = "none";
+        }
+    }, 1000);
+
+    closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent triggering parent share click
+        clearInterval(countdown);
+        popup.style.display = "none";
+    });
+
+    document.getElementById("shareBtn").addEventListener("click", () => {
+        const shareText = `🎬 TVK Movies – தமிழ் Cinemas\n\nதமிழ் & Hollywood Movies - யை இலவசமாக காணுங்கள் “TVK - Movies” - ல்.\n\n🔥 Watch the Latest தமிழ் & Hollywood Movies\n🎥 HD Quality Streaming\n🆕 Regular Movie Updates\n📱 Fast & Easy to Use\n💯 Free Entertainment\n\n✨ Features:\n✅ தமிழ் Movies\n✅ Hollywood Movies in தமிழ்\n✅ Latest Releases\n✅ Simple Interface\n✅ Mobile Friendly\n\n👇 Download Now\n\nhttps://play.google.com/store/apps/details?id=com.vipmovies.tvkmovies&pcampaignid=web_share\n\n📢 Share with Friends & Family and Enjoy Unlimited Entertainment!`;
+
+        if(navigator.share){
+            navigator.share({
+                title: "TVK Movies",
+                text: shareText
+            });
+        } else {
+            window.open("https://wa.me/?text=" + encodeURIComponent(shareText), "_blank");
+        }
+    });
+
+    // Slider fetch & initialization
+    let index = 0;
+    fetch("https://database.akatsuki-pvt-ltd.workers.dev/slider")
+        .then(res => res.json())
+        .then(data => {
+            const slidesContainer = document.getElementById("slidesContainer");
+            const dotContainer = document.getElementById("dot");
+
+            data.forEach((item, i) => {
+                slidesContainer.innerHTML += `
+                    <a href="${item.url}">
+                        <div class="slides">
+                            <img class="imggg" src="${item.image}" alt="Slide">
+                        </div>
+                    </a>
+                `;
+                dotContainer.innerHTML += `<span class="dot" onclick="setSlide(${i})"></span>`;
+            });
+            startSlider();
+        })
+        .catch(err => console.error("Error loading slider:", err));
+
+    let changeSlideTimeout;
+    function startSlider(){
+        const slides = document.querySelectorAll(".slides");
+        const dots = document.querySelectorAll(".dot");
+        if (slides.length === 0) return;
+
+        function changeSlide(){
+            if(index >= slides.length){
+                index = 0;
+            }
+            showSlide(index);
+            index++;
+            changeSlideTimeout = setTimeout(changeSlide, 3500);
+        }
+        changeSlide();
+    }
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll(".slides");
+        const dots = document.querySelectorAll(".dot");
+        if(slides.length === 0) return;
+        
+        slides.forEach((slide, i) => {
+            slide.style.display = "none";
+            dots[i].classList.remove("active");
+        });
+        slides[n].style.display = "block";
+        dots[n].classList.add("active");
+    }
+
+    function setSlide(n) {
+        clearTimeout(changeSlideTimeout);
+        index = n;
+        showSlide(n);
+        index++;
+        changeSlideTimeout = setTimeout(() => {
+            const slides = document.querySelectorAll(".slides");
+            if(index >= slides.length) index = 0;
+            showSlide(index);
+            index++;
+        }, 3500);
+    }
+
+    function filterMovie(category, year){
+        location.href = "list.html?category=" + category + "&year=" + year;
+    }
+
+    let allMovies = [];
+    fetch("https://database.akatsuki-pvt-ltd.workers.dev/movies")
+        .then(res => res.json())
+        .then(data => {
+            allMovies = data;
+            loadSection("Tamil", "2026", "tamilMovies");
+            loadSection("Hollywood", "2025", "hollywoodMovies");
+        })
+        .catch(err => console.error("Error loading movies:", err));
+
+    function loadSection(category, year, containerId){
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        const movies = allMovies
+            .filter(m => m.category === category && m.year === year)
+            .slice(0, 10);
+
+        movies.forEach(movie => {
+            const card = document.createElement("a");
+            card.href = "watch.html?reward=" + movie.id;
+            card.className = "movie-card-link";
+
+            const box = document.createElement("div");
+            box.className = "movie-card";
+
+            const imgWrapper = document.createElement("div");
+            imgWrapper.className = "movie-card-img-wrapper";
+
+            const img = document.createElement("img");
+            img.className = "movie-card-img";
+            img.src = movie.image;
+            img.alt = movie.title;
+            img.loading = "lazy";
+
+            imgWrapper.appendChild(img);
+
+            const title = document.createElement("h1");
+            title.className = "movie-card-title";
+            title.innerText = movie.title;
+
+            box.appendChild(imgWrapper);
+            box.appendChild(title);
+            card.appendChild(box);
+            container.appendChild(card);
+        });
+
+        // VIEW ALL CARD
+        const viewCard = document.createElement("div");
+        viewCard.className = "view-all-card";
+        viewCard.onclick = () => filterMovie(category, year);
+
+        viewCard.innerHTML = `
+            <div class="view-all-icon">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+            <div class="view-all-text">View All</div>
+        `;
+        container.appendChild(viewCard);
+    }
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d56e216847a549828166c56d48a99585"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>

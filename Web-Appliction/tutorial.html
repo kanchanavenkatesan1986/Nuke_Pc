@@ -60,7 +60,11 @@
             <div class="container">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumbs" id="breadcrumbs-list">
-                        <!-- Dynamic Injection -->
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-separator"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></li>
+                        <li class="breadcrumb-item"><a href="categories.html#html">HTML Tutorials</a></li>
+                        <li class="breadcrumb-separator"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></li>
+                        <li class="breadcrumb-item active" aria-current="page">Introduction to HTML5</li>
                     </ol>
                 </nav>
             </div>
@@ -73,7 +77,12 @@
                 <aside class="sidebar-left">
                     <h3 class="sidebar-title">Course Topics</h3>
                     <ul class="sidebar-list" id="sidebar-menu-list">
-                        <!-- Dynamic Injection -->
+                        <li><a href="tutorial.html?id=html-introduction" class="sidebar-link active" title="Introduction to HTML5">Introduction to HTML5</a></li>
+                        <li><a href="tutorial.html?id=html-elements" class="sidebar-link" title="HTML Elements & Nesting">HTML Elements & Nesting</a></li>
+                        <li><a href="tutorial.html?id=html-attributes" class="sidebar-link" title="HTML Attributes Guide">HTML Attributes Guide</a></li>
+                        <li><a href="tutorial.html?id=html-headings" class="sidebar-link" title="HTML Headings (h1 to h6)">HTML Headings (h1 to h6)</a></li>
+                        <li><a href="tutorial.html?id=html-paragraphs" class="sidebar-link" title="HTML Paragraphs and Breaks">HTML Paragraphs and Breaks</a></li>
+                        <li><a href="tutorial.html?id=html-lists" class="sidebar-link" title="HTML Lists: Ordered, Unordered, and Description">HTML Lists: Ordered, Unordered...</a></li>
                     </ul>
                 </aside>
 
@@ -87,15 +96,153 @@
                             </div>
                             <div class="article-meta-item">
                                 <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                                <span id="article-read-time">5 min read</span>
+                                <span id="article-read-time">4 min read</span>
                             </div>
                         </div>
-                        <h1 class="article-title-main" id="article-title">Loading...</h1>
+                        <h1 class="article-title-main" id="article-title">Introduction to HTML5</h1>
                     </div>
 
                     <!-- Main Dynamic Content Body -->
                     <div class="article-body" id="article-body-content">
-                        <div class="spinner" style="margin: 4rem auto;"></div>
+                        <section id="sec-intro">
+                            <h2>Introduction</h2>
+                            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. HTML5 is the latest major revision of the HTML standard.</p>
+                        </section>
+                        <section id="sec-definition">
+                            <h2>What is Introduction to HTML5?</h2>
+                            <p>HTML5 defines the structure and layout of a web document by using tags and attributes.</p>
+                        </section>
+                        <section id="sec-syntax">
+                            <h2>Syntax</h2>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">html</span>
+                                    <button class="copy-code-btn" data-clipboard-target="#syntax-code">
+                                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code id="syntax-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My First Heading&lt;/h1&gt;
+    &lt;p&gt;My first paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </section>
+                        <section id="sec-examples">
+                            <h2>Code Examples</h2>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">html</span>
+                                    <button class="copy-code-btn" data-clipboard-target="#example-code">
+                                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code id="example-code">&lt;!-- Example of a standard HTML5 skeleton --&gt;
+&lt;header&gt;
+    &lt;h1&gt;Welcome to CodeMaster&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;a href="#home"&gt;Home&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+                            </div>
+                            <div class="output-preview">
+                                <div class="output-title">Output Example</div>
+                                <div class="output-content">
+                                    <h1>Welcome to CodeMaster</h1>
+                                    <nav>
+                                        <a href="#home" onclick="return false;">Home</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="sec-explanation">
+                            <h2>Code Explanation</h2>
+                            <p>The DOCTYPE declaration defines that this document is an HTML5 document. The &lt;html&gt; element is the root element of an HTML page. The &lt;head&gt; element contains meta information about the page. The &lt;body&gt; element contains the visible page content.</p>
+                        </section>
+                        
+                        <div class="adsense-placeholder adsense-banner-horizontal">
+                            <span class="adsense-label">Advertisement</span>
+                            <span class="adsense-mock-content">Responsive Google AdSense Banner Slot</span>
+                        </div>
+
+                        <section id="sec-notes">
+                            <h2>Key Notes & Tips</h2>
+                            <div class="content-box box-note">
+                                <div class="box-note-title">
+                                    <svg style="width:20px; height:20px; fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                                    Important Note
+                                </div>
+                                <p>HTML tags are not case-sensitive, but using lowercase is highly recommended.</p>
+                            </div>
+                            <div class="content-box box-tip">
+                                <div class="box-tip-title">
+                                    <svg style="width:20px; height:20px; fill:currentColor" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+                                    Developer Tip
+                                </div>
+                                <p>Always include the lang attribute in the &lt;html&gt; tag to aid screen readers and search engines.</p>
+                            </div>
+                        </section>
+                        <section id="sec-practices">
+                            <h2>Best Practices</h2>
+                            <ul class="best-practices-list">
+                                <li class="best-practice-item">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                    <span>Use semantic elements like &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;footer&gt; rather than generic &lt;div&gt; tags.</span>
+                                </li>
+                                <li class="best-practice-item">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                    <span>Always close tags properly.</span>
+                                </li>
+                                <li class="best-practice-item">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                    <span>Keep formatting clean and indented for readability.</span>
+                                </li>
+                            </ul>
+                        </section>
+                        <section id="sec-interview">
+                            <h2>Interview Questions</h2>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Q: What does HTML stand for?</span>
+                                    <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>HTML stands for HyperText Markup Language. It is the standard markup language for creating web pages.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Q: What is the HTML5 DOCTYPE declaration?</span>
+                                    <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The DOCTYPE declaration is &lt;!DOCTYPE html&gt; and it tells the browser to render the page as HTML5.</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="sec-summary">
+                            <h2>Summary</h2>
+                            <p>HTML is the backbone of web development. Mastering the structure and semantics of HTML5 is the crucial first step for any aspiring developer.</p>
+                        </section>
+                        <section id="sec-faq">
+                            <h2>Frequently Asked Questions</h2>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Is HTML a programming language?</span>
+                                    <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>No, HTML is a markup language, not a programming language. It is used to structure content rather than perform logical processes.</p>
+                                </div>
+                            </div>
+                        </section>
                     </div>
 
                     <!-- Previous & Next Article Navigation -->

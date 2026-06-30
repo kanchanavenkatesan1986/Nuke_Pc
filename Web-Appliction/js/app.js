@@ -143,7 +143,15 @@ function initArticleRenderer() {
     const articleId = urlParams.get('id');
 
     if (!articleId) {
-        window.location.href = 'categories.html';
+        // Fallback to html-introduction statically and dynamically to avoid crawler redirects
+        const defaultArticle = articles.find(a => a.id === 'html-introduction');
+        if (defaultArticle) {
+            injectArticleSchema(defaultArticle);
+            buildTableOfContents();
+            initCopyButtons();
+            initAccordionEvents();
+            renderRelatedArticles(defaultArticle);
+        }
         return;
     }
 

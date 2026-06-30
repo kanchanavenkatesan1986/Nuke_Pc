@@ -78,8 +78,46 @@
         <section class="section">
             <div class="container" style="max-width: 800px;">
                 <div class="accordion-list" id="interview-list-items">
-                    <!-- Dynamically populated by js/app.js:initInterviewQAInterface() -->
-                    <div class="spinner" style="margin: 4rem auto;"></div>
+                    <!-- Pre-rendered Static Fallbacks for Crawler Compliance -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Explain semantic HTML5 and its benefits.</span>
+                            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Semantic HTML5 uses tags that describe their meaning (e.g. &lt;header&gt;, &lt;article&gt;) rather than formatting. Benefits include better SEO, improved accessibility, and clean code.</p>
+                            <div style="margin-top:1.5rem; border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Related topic: <a href="tutorial.html?id=interview-html-1">Semantic HTML5 Benefits</a></span>
+                                <a href="tutorial.html?id=interview-html-1" class="card-link">Learn Core Concept &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>What is the difference between block and inline elements?</span>
+                            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Block elements start on a new line and take up the full container width (e.g. &lt;div&gt;, &lt;p&gt;). Inline elements display side-by-side and only occupy content width (e.g. &lt;span&gt;, &lt;a&gt;).</p>
+                            <div style="margin-top:1.5rem; border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Related topic: <a href="tutorial.html?id=interview-html-2">Block vs Inline Layout</a></span>
+                                <a href="tutorial.html?id=interview-html-2" class="card-link">Learn Core Concept &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Explain the CSS Box Model and how sizing is calculated.</span>
+                            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The CSS Box Model is the foundation of web layout. Every element is represented as a rectangular box consisting of margins, borders, padding, and the actual content. By default, the width and height of an element are calculated only for the content box (content-box), but using box-sizing: border-box includes padding and border in the specified dimensions, which is the standard practice for modern responsive designs.</p>
+                            <div style="margin-top:1.5rem; border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Related topic: <a href="tutorial.html?id=css-margin">CSS Margin & Padding</a></span>
+                                <a href="tutorial.html?id=css-margin" class="card-link">Learn Core Concept &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
