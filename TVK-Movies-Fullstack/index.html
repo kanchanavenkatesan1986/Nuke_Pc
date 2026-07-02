@@ -84,36 +84,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </h1>
     </div>
 
-    <!-- Year Links -->
-    <div class="main-year">
-        <div class="sub-year">
-            <div class="year" onclick="filterMovie('Tamil','2026')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2026 Tamil Movies
-            </div>
-            <div class="year" onclick="filterMovie('Tamil','2025')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2025 Tamil Movies
-            </div>
-            <div class="year" onclick="filterMovie('Tamil','2024')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2024 Tamil Movies
-            </div>
-        </div>
-
-        <div class="sub-year">
-            <div class="year" onclick="filterMovie('Hollywood','2026')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2026 Hollywood Movies
-            </div>
-            <div class="year" onclick="filterMovie('Hollywood','2025')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2025 Hollywood Movies
-            </div>
-            <div class="year" onclick="filterMovie('Hollywood','2024')">
-                <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> 2024 Hollywood Movies
-            </div>
-        </div>
+    <!-- Years Collection Tags (Horizontal Chips Scroll) -->
+    <div class="chips-scroll">
+        <a class="chip-btn" onclick="filterMovie('Tamil','2026')">
+            <i class="fa-solid fa-calendar-days"></i> 2026 Tamil
+        </a>
+        <a class="chip-btn" onclick="filterMovie('Tamil','2025')">
+            <i class="fa-solid fa-calendar-days"></i> 2025 Tamil
+        </a>
+        <a class="chip-btn" onclick="filterMovie('Tamil','2024')">
+            <i class="fa-solid fa-calendar-days"></i> 2024 Tamil
+        </a>
+        <a class="chip-btn" onclick="filterMovie('Hollywood','2026')">
+            <i class="fa-solid fa-film"></i> 2026 Hollywood
+        </a>
+        <a class="chip-btn" onclick="filterMovie('Hollywood','2025')">
+            <i class="fa-solid fa-film"></i> 2025 Hollywood
+        </a>
+        <a class="chip-btn" onclick="filterMovie('Hollywood','2024')">
+            <i class="fa-solid fa-film"></i> 2024 Hollywood
+        </a>
     </div>
-    
-    <button class="all-year" onclick="window.location.href='years.html'">
-        View Years Collection <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i>
-    </button>
 
     <!-- Tamil Movies Section -->
     <div class="info">
@@ -132,6 +123,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </h1>
     </div>
     <div class="scroll" id="hollywoodMovies"></div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="search.html" class="bottom-nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="trending.html" class="bottom-nav-item">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        <a href="years.html" class="bottom-nav-item">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Years</span>
+        </a>
+        <a href="new-releases.html" class="bottom-nav-item">
+           <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>New</span>
+        </a>
+    </div>
 
 </div>
 

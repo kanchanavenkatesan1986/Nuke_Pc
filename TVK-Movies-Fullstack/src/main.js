@@ -23,6 +23,24 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+// Highlight active bottom navigation item based on current page URL
+document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname;
+    let page = path.split("/").pop();
+    if (!page || page === "") page = "index.html";
+    
+    const navItems = document.querySelectorAll(".bottom-nav-item");
+    navItems.forEach(item => {
+        const href = item.getAttribute("href");
+        if (href) {
+            const itemPage = href.split("/").pop();
+            if (itemPage === page) {
+                item.classList.add("active");
+            }
+        }
+    });
+});
+
 function shareApp() {
     const message =
         "TVK Movies-Tamil Cinemas 🎬\n\n" +

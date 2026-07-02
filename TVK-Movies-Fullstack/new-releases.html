@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Releases - VIP Movies</title>
+    
+    <link rel="stylesheet" href="./src/main.css"/>
+    <script src="./src/main.js" defer></script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+        .releases-hero {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.06) 0%, var(--bg-secondary) 100%);
+            border: 1px solid rgba(0, 230, 118, 0.1);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .releases-hero h1 {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 6px;
+        }
+
+        .releases-hero p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .release-stats {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 2px;
+        }
+
+        .release-stats::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 100px;
+            padding: 14px 12px;
+            background-color: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--card-radius);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .stat-card .stat-number {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-card .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .timeline-label i {
+            color: var(--success);
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main">
+
+    <!-- Navigation Drawer (Overlay) -->
+    <div id="myNav" class="overlay">
+        <img src="./m-image/Close icon.png" class="close" onclick="closeNav()" alt="Close Menu">
+        <img src="./m-image/VIP Movies.jpg" class="navimg" alt="VIP Movies">
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a href="sub-pages/feedback.html" class="nav-link">
+                <i class="fa-solid fa-comment-dots"></i> Feedback
+            </a>
+            <a href="sub-pages/about.html" class="nav-link">
+                <i class="fa-solid fa-circle-info"></i> About
+            </a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="./m-image/Menu icon.png" class="menu" onclick="openNav()" alt="Menu">
+        <img src="./m-image/Vip Title.png" class="title" alt="VIP Movies Logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <a href="search.html">
+            <img src="./m-image/Search icon.png" class="search" alt="Search">
+        </a>
+    </div>
+
+    <!-- New Releases Hero -->
+    <div class="releases-hero">
+        <h1><i class="fa-solid fa-bolt" style="margin-right:6px;"></i>New Releases</h1>
+        <p>Fresh additions to our library – watch before anyone else</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="release-stats">
+        <div class="stat-card">
+            <span class="stat-number" id="totalCount">—</span>
+            <span class="stat-label">Total Movies</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="tamilCount">—</span>
+            <span class="stat-label">Tamil</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="hwCount">—</span>
+            <span class="stat-label">Hollywood</span>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterReleases('all')">All New</button>
+        <button class="filter-tab" onclick="filterReleases('Tamil')">Tamil</button>
+        <button class="filter-tab" onclick="filterReleases('Hollywood')">Hollywood</button>
+        <button class="filter-tab" onclick="filterReleases('2026')">2026</button>
+        <button class="filter-tab" onclick="filterReleases('2025')">2025</button>
+    </div>
+
+    <!-- Timeline Label -->
+    <div class="timeline-label">
+        <i class="fa-solid fa-clock"></i>
+        <span id="timelineText">Recently Added</span>
+    </div>
+
+    <!-- New Releases Grid -->
+    <div id="releasesGrid" class="movies-grid"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="not-box" style="display: none;">
+        <i class="fa-solid fa-bolt" style="font-size: 38px; color: var(--success); margin-bottom: 16px;"></i>
+        <h1 class="note">Loading new releases...</h1>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="search.html" class="bottom-nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="trending.html" class="bottom-nav-item">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        <a href="years.html" class="bottom-nav-item">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Years</span>
+        </a>
+        <a href="new-releases.html" class="bottom-nav-item">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>New</span>
+        </a>
+    </div>
+
+</div>
+
+<script>
+    let allMovies = [];
+
+    fetch("https://database.akatsuki-pvt-ltd.workers.dev/movies")
+        .then(res => res.json())
+        .then(data => {
+            allMovies = data;
+
+            // Stats
+            document.getElementById("totalCount").textContent = data.length;
+            document.getElementById("tamilCount").textContent = data.filter(m => m.category === "Tamil").length;
+            document.getElementById("hwCount").textContent = data.filter(m => m.category === "Hollywood").length;
+
+            renderReleases('all');
+        })
+        .catch(err => {
+            console.error("Error loading releases:", err);
+            document.getElementById("emptyState").style.display = "flex";
+        });
+
+    function filterReleases(filter) {
+        // Update active tab
+        document.querySelectorAll(".filter-tab").forEach(tab => tab.classList.remove("active"));
+        event.target.classList.add("active");
+        renderReleases(filter);
+    }
+
+    function renderReleases(filter) {
+        const grid = document.getElementById("releasesGrid");
+        const empty = document.getElementById("emptyState");
+        const timeline = document.getElementById("timelineText");
+        grid.innerHTML = "";
+
+        let movies = [...allMovies];
+
+        if (filter === 'Tamil' || filter === 'Hollywood') {
+            movies = movies.filter(m => m.category === filter);
+            timeline.textContent = `Latest ${filter} Releases`;
+        } else if (filter === '2026' || filter === '2025') {
+            movies = movies.filter(m => m.year === filter);
+            timeline.textContent = `${filter} Releases`;
+        } else {
+            timeline.textContent = "Recently Added";
+        }
+
+        // Sort by ID descending (newest first)
+        movies.sort((a, b) => b.id - a.id);
+
+        if (movies.length === 0) {
+            empty.style.display = "flex";
+            return;
+        }
+        empty.style.display = "none";
+
+        movies.forEach(movie => {
+            const card = document.createElement("a");
+            card.href = "watch.html?reward=" + movie.id;
+            card.className = "list-card-link new-release-card";
+
+            card.innerHTML = `
+                <div class="list-card">
+                    <div class="list-card-img-wrapper">
+                        <img class="list-card-img" src="${movie.image}" alt="${movie.title}" loading="lazy">
+                        <span class="new-badge"><i class="fa-solid fa-bolt"></i> NEW</span>
+                        <span class="list-card-badge">${movie.year}</span>
+                    </div>
+                    <div class="list-card-details">
+                        <h3 class="list-card-title">${movie.title}</h3>
+                        <p class="list-card-info">${movie.language} • ${movie.release || movie.year}</p>
+                        <div class="list-card-action">
+                            <i class="fa-solid fa-circle-play"></i> Stream Now
+                        </div>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d56e216847a549828166c56d48a99585"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
