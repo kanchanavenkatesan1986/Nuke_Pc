@@ -1,0 +1,20 @@
+{
+  "name": "tvk-movies-data-extractor",
+  "version": "1.0.0",
+  "description": "Production-ready movie scraper and metadata extractor",
+  "main": "scraper/start.js",
+  "scripts": {
+    "start": "node scraper/start.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.45.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "TVK",
+  "license": "ISC"
+}

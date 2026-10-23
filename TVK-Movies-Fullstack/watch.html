@@ -6,6 +6,7 @@
     <title>Watch Movie - VIP Movies</title>
     
     <link rel="stylesheet" href="./src/main.css"/>
+    <script src="./src/api.js"></script>
     <script src="./src/main.js" defer></script>
     
     <!-- Fonts & Icons -->
@@ -442,14 +443,15 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
         </a>
-        <a href="trending.html" class="bottom-nav-item">
-            <i class="fa-solid fa-fire"></i>
-            <span>Trending</span>
-        </a>
         <a href="years.html" class="bottom-nav-item">
             <i class="fa-solid fa-calendar-days"></i>
             <span>Years</span>
         </a>
+        <a href="trending.html" class="bottom-nav-item">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        
         <a href="new-releases.html" class="bottom-nav-item">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span>New</span>
@@ -465,8 +467,7 @@
     if(!movieId) {
         document.querySelector(".watch-container").innerHTML = "<div class='not-box'><i class='fa-solid fa-circle-exclamation'></i><p class='note'>No movie selected. Go back to <a href='index.html' style='color:var(--accent);'>Home</a>.</p></div>";
     } else {
-        fetch("https://database.akatsuki-pvt-ltd.workers.dev/movies")
-            .then(res => res.json())
+        api.getMovies()
             .then(data => {
                 const movie = data.find(m => m.id == Number(movieId));
 

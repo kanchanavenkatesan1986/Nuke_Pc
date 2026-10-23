@@ -6,6 +6,7 @@
     <title>VIP Movies - Watch Free Tamil & Hollywood Movies</title>
     
     <link rel="stylesheet" href="./src/main.css"/>
+    <script src="./src/api.js"></script>
     <script src="./src/main.js" defer></script>
     
     <!-- Lexend Font -->
@@ -134,14 +135,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
         </a>
-        <a href="trending.html" class="bottom-nav-item">
-            <i class="fa-solid fa-fire"></i>
-            <span>Trending</span>
-        </a>
         <a href="years.html" class="bottom-nav-item">
             <i class="fa-solid fa-calendar-days"></i>
             <span>Years</span>
         </a>
+        <a href="trending.html" class="bottom-nav-item">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        
         <a href="new-releases.html" class="bottom-nav-item">
            <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span>New</span>
@@ -152,6 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- scripts -->
 <script>
+    console.log("index.html inline script starts, window.api is:", window.api);
     // Popup Overlay Timer
     const popup = document.getElementById("sharePopup");
     const closeBtn = document.getElementById("closePopup");
@@ -188,8 +191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // Slider fetch & initialization
     let index = 0;
-    fetch("https://database.akatsuki-pvt-ltd.workers.dev/slider")
-        .then(res => res.json())
+    api.getSlider()
         .then(data => {
             const slidesContainer = document.getElementById("slidesContainer");
             const dotContainer = document.getElementById("dot");
@@ -256,8 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     let allMovies = [];
-    fetch("https://database.akatsuki-pvt-ltd.workers.dev/movies")
-        .then(res => res.json())
+    api.getMovies()
         .then(data => {
             allMovies = data;
             loadSection("Tamil", "2026", "tamilMovies");

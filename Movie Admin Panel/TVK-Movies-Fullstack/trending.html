@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Movies - VIP Movies</title>
+    
+    <link rel="stylesheet" href="./src/main.css"/>
+    <script src="./src/api.js"></script>
+    <script src="./src/main.js" defer></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d56e216847a549828166c56d48a99585"}'></script><!-- End Cloudflare Web Analytics -->
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+
+<body>
+
+<div class="main">
+
+    <!-- Navigation Drawer (Overlay) -->
+    <div id="myNav" class="overlay">
+        <img src="./m-image/Close icon.png" class="close" onclick="closeNav()" alt="Close Menu">
+        <img src="./m-image/VIP Movies.jpg" class="navimg" alt="VIP Movies">
+        
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a href="sub-pages/feedback.html" class="nav-link">
+                <i class="fa-solid fa-comment-dots"></i> Feedback
+            </a>
+            <a href="sub-pages/about.html" class="nav-link">
+                <i class="fa-solid fa-circle-info"></i> About
+            </a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="./m-image/Menu icon.png" class="menu" onclick="openNav()" alt="Menu">
+        <img src="./m-image/Vip Title.png" class="title" alt="VIP Movies Logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <a href="search.html">
+            <img src="./m-image/Search icon.png" class="search" alt="Search">
+        </a>
+    </div>
+
+    <!-- Trending Hero Banner -->
+    <div class="trending-hero">
+        <h1><i class="fa-solid fa-fire" style="margin-right:6px;"></i>Trending Now</h1>
+        <p>Most watched movies this week – don't miss what everyone's streaming</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterTrending('all')">All</button>
+        <button class="filter-tab" onclick="filterTrending('Tamil')">Tamil</button>
+        <button class="filter-tab" onclick="filterTrending('Hollywood')">Hollywood</button>
+    </div>
+
+    <!-- Trending Movie Grid -->
+    <div id="trendingGrid" class="movies-grid"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="not-box" style="display: none;">
+        <i class="fa-solid fa-fire" style="font-size: 38px; color: var(--accent); margin-bottom: 16px;"></i>
+        <h1 class="note">Loading trending movies...</h1>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="search.html" class="bottom-nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="years.html" class="bottom-nav-item">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Years</span>
+        </a>
+        <a href="trending.html" class="bottom-nav-item">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        
+        <a href="new-releases.html" class="bottom-nav-item">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>New</span>
+        </a>
+    </div>
+
+</div>
+
+<script>
+    let allMovies = [];
+    let currentFilter = 'all';
+
+    api.getMovies()
+        .then(data => {
+            allMovies = data;
+            renderTrending('all');
+        })
+        .catch(err => {
+            console.error("Error loading trending:", err);
+            document.getElementById("emptyState").style.display = "flex";
+        });
+
+    function filterTrending(cat) {
+        currentFilter = cat;
+        // Update active tab
+        document.querySelectorAll(".filter-tab").forEach(tab => tab.classList.remove("active"));
+        event.target.classList.add("active");
+        renderTrending(cat);
+    }
+
+    function renderTrending(category) {
+        const grid = document.getElementById("trendingGrid");
+        const empty = document.getElementById("emptyState");
+        grid.innerHTML = "";
+
+        let movies = [...allMovies];
+        if (category !== 'all') {
+            movies = movies.filter(m => m.category === category);
+        }
+
+        // Simulate trending by taking the latest movies (highest ID = newest)
+        movies.sort((a, b) => b.id - a.id);
+        const trending = movies.slice(0, 20);
+
+        if (trending.length === 0) {
+            empty.style.display = "flex";
+            return;
+        }
+        empty.style.display = "none";
+
+        trending.forEach((movie, i) => {
+            const card = document.createElement("a");
+            card.href = "watch.html?reward=" + movie.id;
+            card.className = "list-card-link";
+
+            card.innerHTML = `
+                <div class="list-card">
+                    <div class="list-card-img-wrapper">
+                        <img class="list-card-img" src="${movie.image}" alt="${movie.title}" loading="lazy">
+                        <span class="trending-badge"><i class="fa-solid fa-fire"></i> #${i + 1}</span>
+                        <span class="list-card-badge">${movie.year}</span>
+                        <span class="rank-number">${i + 1}</span>
+                    </div>
+                    <div class="list-card-details">
+                        <h3 class="list-card-title">${movie.title}</h3>
+                        <p class="list-card-info">${movie.language} • ${movie.year}</p>
+                        <div class="list-card-action">
+                            <i class="fa-solid fa-circle-play"></i> Watch Now
+                        </div>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d56e216847a549828166c56d48a99585"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
